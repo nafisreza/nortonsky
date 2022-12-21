@@ -7,6 +7,7 @@ const btnsOpenModal = document.querySelectorAll(".btn--show-modal");
 const btnCloseModal = document.querySelector(".btn--close-modal");
 const nav = document.querySelector(".nav");
 const navLinks = document.querySelector(".nav__links");
+const toggleBtn = document.querySelector(".nav__toggle");
 const header = document.querySelector(".header");
 const btnScrollTo = document.querySelector(".btn--scroll-to");
 const allSections = document.querySelectorAll(".section");
@@ -69,3 +70,23 @@ allSections.forEach((section) => {
     sectionObserver.observe(section);
     section.classList.add('section--hidden');
 } )
+
+/////////////////////////////////////////////////////////////
+// Toggle Navbar
+/////////////////////////////////////////////////////////////
+
+toggleBtn.addEventListener('click', function(){
+    if(navLinks.classList.contains('nav__open')){
+        navLinks.classList.remove('nav__open');
+        document.querySelector('html').style.overflow = 'visible';
+    }else {
+        navLinks.classList.add('nav__open'); 
+        document.querySelector('html').style.overflow = 'hidden';
+    }
+})
+
+navLinks.addEventListener('click', function(){
+    navLinks.classList.contains('nav__open') && navLinks.classList.remove('nav__open');
+    document.querySelector('html').style.overflow = 'visible';
+})
+
