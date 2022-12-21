@@ -12,6 +12,7 @@ const header = document.querySelector(".header");
 const btnScrollTo = document.querySelector(".btn--scroll-to");
 const allSections = document.querySelectorAll(".section");
 const section1 = document.querySelector("#section--1");
+const imgTargets = document.querySelectorAll("img[data-src]")
 const tabsContainer = document.querySelector(".operations__tab-container");
 const tabs = document.querySelectorAll(".operations__tab");
 const tabsContent = document.querySelectorAll(".operations__content");
@@ -108,3 +109,33 @@ function closeModal(){
 btnsOpenModal.forEach((btn) => btn.addEventListener('click', openModal));
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
+
+
+/////////////////////////////////////////////////////////////
+// Learn More Button
+/////////////////////////////////////////////////////////////
+
+btnScrollTo.addEventListener('click', function(){
+    section1.scrollIntoView({behavior: "smooth"});
+})
+
+/////////////////////////////////////////////////////////////
+// Lazy Loading
+/////////////////////////////////////////////////////////////
+
+const loadImg = function (entries, observer) {
+    const entry = entries[0];
+    if (!entry.isIntersecting) return;
+    entry.target.src = entry.target.dataset.src; 
+
+    entry.target.addEventListener('load', function(){
+        entry.target.classList.remove('lazy-img');
+    })
+}
+
+const imgObserver = new IntersectionObserver(loadImg, {
+    root: null,
+    threshold: 0.5
+})
+
+imgTargets.forEach((img) => imgObserver.observe(img));
