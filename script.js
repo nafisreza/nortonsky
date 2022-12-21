@@ -90,3 +90,21 @@ navLinks.addEventListener('click', function(){
     document.querySelector('html').style.overflow = 'visible';
 })
 
+/////////////////////////////////////////////////////////////
+// Modal Window
+/////////////////////////////////////////////////////////////
+
+function openModal(e){
+    e.preventDefault();
+    modal.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+}
+
+function closeModal(){
+    modal.classList.add('hidden');
+    overlay.classList.add('hidden');
+}
+
+btnsOpenModal.forEach((btn) => btn.addEventListener('click', openModal));
+btnCloseModal.addEventListener('click', closeModal);
+overlay.addEventListener('click', closeModal);
